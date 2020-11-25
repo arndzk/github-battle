@@ -1,15 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
+import Popular from './components/Popular'
 
-function App() {
-  return (
-    <div>
-      Hello Arnold!
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div classname = 'container'>
+        <Popular />
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-export default App;
