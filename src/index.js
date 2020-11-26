@@ -7,7 +7,7 @@ import Battle from './components/Battle'
 class App extends React.Component {
   render() {
     return (
-      <div classname = 'container'>
+      <div className = 'container'>
         <Battle />
       </div>
     );

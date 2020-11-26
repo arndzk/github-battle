@@ -24,6 +24,19 @@ li {
     padding: 50px;
 }
 
+.instructions-container {
+    margin: 100px 0px;
+}
+
+.players-container {
+    margin: 100px 0px;
+}
+
+.container-sm {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .flex-center {
     display: flex;
     justify-content: center;
@@ -55,6 +68,13 @@ li {
     font-size: 35px;
     font-weight: 300;
     margin: 20px;
+}
+
+.header-sm {
+    font-size: 28px;
+    font-weight: 300;
+    margin: 10px;
+    min-height: 66px;
 }
 
 .avatar {
@@ -114,21 +134,6 @@ li {
     margin-bottom: 8px;
 }
 
-.header-sm {
-    font-size: 28px;
-    font-weight: 300;
-    margin: 10px;
-}
-
-.instructions-container {
-    margin: 100px 0px;
-}
-
-.container-sm {
-    width: 80%;
-    margin: 0 auto;
-}
-
 .battle-instructions {
     padding: 0px;
     font-size: 25px;
@@ -142,4 +147,68 @@ li {
 .battle-instructions svg{
     padding: 40px;
     border-radius: 5px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.player {
+    flex: 1;
+    margin: 0 20px;
+    padding: 10px;
+}
+
+.player-label {
+    font-size: 20px;
+    margin: 5px 0px;
+    font-weight: 300;
+}
+
+.player-inputs input{
+    padding: 10px;
+    font-size: 16px;
+    flex: 2;
+    border-radius: 5px;
+    border: none;
+    color: lightgray;
+}
+
+.player-inputs .input-light {
+    background-color: #474747;
+}
+
+.player-inputs button {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.btn {
+    padding: 10px;
+    text-decoration: uppercase;
+    border-radius: 3px;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 200px;
+}
+
+.btn-dark {
+    color: lightgray;
+    background: #282828;
+}
+
+.btn-dark:disabled {
+    background: #f2f2f2;
+    color: #c7c7c7;
 }
