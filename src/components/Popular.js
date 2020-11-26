@@ -42,11 +42,11 @@ function ReposGrid ({ repos }) {
                         </h2>
                         <ul className = 'card-list'>
                             <li>
-                                <GoMarkGithub color = 'cfcfc4' size = {22}/>
+                                <GoMarkGithub color = '#cfcfc4' size = {22}/>
                                 <a href = {`https://github.com/${login}`}>{login}</a>
                             </li>
                             <li>
-                                <GoStar color = '#fdfd96' size = {22}/>
+                                <GoStar color = '#ffb347' size = {22}/>
                                 {stargazers_count.toLocaleString()} stars
                             </li>
                             <li>
