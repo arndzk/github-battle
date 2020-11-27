@@ -110,6 +110,10 @@ li {
     margin-right: 10px;
 }
 
+.btn-space {
+    margin: 40px auto;
+}
+
 .card-list a {
     font-weight: 500;
     color: inherit
