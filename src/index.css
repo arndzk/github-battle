@@ -124,17 +124,17 @@ li {
     border-radius: 5px;
 }
 
-.repo {
+.card {
     margin: 10px 0px;
     width: 250px;
     padding: 20px;
 }
 
-.repo a {
+.card a {
     text-decoration: none;
 }
 
-.repo img {
+.card img {
     margin-bottom: 8px;
 }
 
@@ -233,4 +233,10 @@ li {
 
 .player-info .link {
     margin-left: 10px;
+}
+
+.error {
+    color: #ff1616;
+    font-size: 20px;
+    margin: 50px 0px;
 }
