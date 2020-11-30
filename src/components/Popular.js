@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Card from './Card';
 import { GoMarkGithub, GoStar, GoGitBranch, GoIssueOpened } from 'react-icons/go';
 import { fetchPopularRepos } from '../utils/api';
 
@@ -34,12 +35,13 @@ function ReposGrid ({ repos }) {
                 const { login, avatar_url } = owner;
 
                 return (
-                    <li key = {html_url} className = 'card bg-light'>
-                        <h4 className = 'header-lg center-text'>#{index + 1}</h4>
-                        <img className = 'avatar' src = {avatar_url} alt = {`Avatar for ${login}`}></img>
-                        <h2 className = 'center-text'>
-                            <a className = 'link' href = {html_url}>{login}</a>
-                        </h2>
+                    <li key = {html_url}>
+                        <Card 
+                            header={`#${index + 1}`}
+                            avatar={avatar_url}
+                            href={html_url}
+                            name={login}
+                        >
                         <ul className = 'card-list'>
                             <li>
                                 <GoMarkGithub color = '#cfcfc4' size = {22}/>
@@ -58,6 +60,7 @@ function ReposGrid ({ repos }) {
                                 {open_issues.toLocaleString()} open issues
                             </li>
                         </ul>
+                        </ Card>
                     </li>
                 )
             })}
