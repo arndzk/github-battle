@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import Loading from './Loading';
+import Tooltip from './Tooltip';
 import { GoMarkGithub, GoStar, GoGitBranch, GoIssueOpened } from 'react-icons/go';
 import { fetchPopularRepos } from '../utils/api';
 
-function LanguagesNav ({ selected, onUpdateLanguage }) {
+function LanguagesNav({ selected, onUpdateLanguage }) {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'Python', 'C#'];
     return (
         <ul className='flex-center'>
             {languages.map((language) => (
                 <li key={language}>
-                    <button 
-                    className='btn-clear nav-link'
-                    style={language === selected ? {color: '#77dd77'} : null}
-                    onClick={() => onUpdateLanguage(language)}>
+                    <button
+                        className='btn-clear nav-link'
+                        style={language === selected ? { color: '#77dd77' } : null}
+                        onClick={() => onUpdateLanguage(language)}>
                         {language}
                     </button>
                 </li>
@@ -28,39 +29,41 @@ LanguagesNav.propTypes = {
     onUpdateLanguage: PropTypes.func.isRequired
 }
 
-function ReposGrid ({ repos }) {
+function ReposGrid({ repos }) {
     return (
-        <ul className = 'grid space-around'>
+        <ul className='grid space-around'>
             {repos.map((repo, index) => {
                 const { name, owner, html_url, stargazers_count, forks, open_issues } = repo;
                 const { login, avatar_url } = owner;
 
                 return (
-                    <li key = {html_url}>
-                        <Card 
+                    <li key={html_url}>
+                        <Card
                             header={`#${index + 1}`}
                             avatar={avatar_url}
                             href={html_url}
                             name={login}
                         >
-                        <ul className = 'card-list'>
-                            <li>
-                                <GoMarkGithub color = '#cfcfc4' size = {22}/>
-                                <a href = {`https://github.com/${login}`}>{login}</a>
-                            </li>
-                            <li>
-                                <GoStar color = '#ffb347' size = {22}/>
-                                {stargazers_count.toLocaleString()} stars
-                            </li>
-                            <li>
-                                <GoGitBranch color = '#b39eb5' size = {22}/>
-                                {forks.toLocaleString()} forks
-                            </li>
-                            <li>
-                                <GoIssueOpened color = '#ff6961' size = {22}/>
-                                {open_issues.toLocaleString()} open issues
-                            </li>
-                        </ul>
+                            <ul className='card-list'>
+                                <li>
+                                    <Tooltip text="Github Username">
+                                        <GoMarkGithub color='#cfcfc4' size={22} />
+                                        <a href={`https://github.com/${login}`}>{login}</a>
+                                    </Tooltip>
+                                </li>
+                                <li>
+                                    <GoStar color='#ffb347' size={22} />
+                                    {stargazers_count.toLocaleString()} stars
+                                </li>
+                                <li>
+                                    <GoGitBranch color='#b39eb5' size={22} />
+                                    {forks.toLocaleString()} forks
+                                </li>
+                                <li>
+                                    <GoIssueOpened color='#ff6961' size={22} />
+                                    {open_issues.toLocaleString()} open issues
+                                </li>
+                            </ul>
                         </ Card>
                     </li>
                 )
@@ -86,7 +89,7 @@ export default class Popular extends React.Component {
         this.updateLanguage = this.updateLanguage.bind(this);
         this.isLoading = this.isLoading.bind(this);
     }
-    
+
     componentDidMount() {
         this.updateLanguage(this.state.selectedLanguage);
     }
@@ -113,7 +116,7 @@ export default class Popular extends React.Component {
                     this.setState({
                         error: `Error fetching repositories for ${selectedLanguage}`
                     })
-            })
+                })
         }
     }
 
@@ -127,13 +130,13 @@ export default class Popular extends React.Component {
 
         return (
             <React.Fragment>
-                <LanguagesNav 
-                    selected = {selectedLanguage}
-                    onUpdateLanguage = {this.updateLanguage}
+                <LanguagesNav
+                    selected={selectedLanguage}
+                    onUpdateLanguage={this.updateLanguage}
                 />
                 {this.isLoading() && <Loading text='Fetching Repos' />}
-                {error && <p className = 'center-text error'>{error}</p> }
-                {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]}/>}
+                {error && <p className='center-text error'>{error}</p>}
+                {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
             </React.Fragment>
         );
     }

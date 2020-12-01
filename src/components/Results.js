@@ -3,9 +3,10 @@ import { battle } from '../utils/api'
 import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from 'react-icons/fa'
 import Card from './Card'
 import Loading from './Loading';
+import Tooltip from './Tooltip';
 import PropTypes from 'prop-types'
 
-function ProfileList ({ profile }) {
+function ProfileList({ profile }) {
   return (
     <ul className='card-list'>
       <li>
@@ -14,14 +15,18 @@ function ProfileList ({ profile }) {
       </li>
       {profile.location && (
         <li>
-          <FaCompass color='rgb(144, 115, 255)' size={22} />
-          {profile.location}
+          <Tooltip text="User's Location" >
+            <FaCompass color='rgb(144, 115, 255)' size={22} />
+            {profile.location}
+          </Tooltip>
         </li>
       )}
       {profile.company && (
         <li>
-          <FaBriefcase color='#795548' size={22} />
-          {profile.company}
+          <Tooltip text="User's Company" >
+            <FaBriefcase color='#795548' size={22} />
+            {profile.company}
+          </Tooltip>
         </li>
       )}
       <li>
@@ -51,10 +56,10 @@ export default class Results extends React.Component {
       loading: true
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     const { playerOne, playerTwo } = this.props
 
-    battle([ playerOne, playerTwo ])
+    battle([playerOne, playerTwo])
       .then((players) => {
         this.setState({
           winner: players[0],
@@ -73,7 +78,7 @@ export default class Results extends React.Component {
     const { winner, loser, error, loading } = this.state
 
     if (loading === true) {
-      return <Loading text='Battling' speed={100}/>
+      return <Loading text='Battling' speed={100} />
     }
 
     if (error) {
@@ -92,7 +97,7 @@ export default class Results extends React.Component {
             href={winner.profile.html_url}
             name={winner.profile.login}
           >
-            <ProfileList profile={winner.profile}/>
+            <ProfileList profile={winner.profile} />
           </Card>
           <Card
             header={winner.score === loser.score ? 'Tie' : 'Loser'}
@@ -101,13 +106,13 @@ export default class Results extends React.Component {
             name={loser.profile.login}
             href={loser.profile.html_url}
           >
-            <ProfileList profile={loser.profile}/>
+            <ProfileList profile={loser.profile} />
           </Card>
         </div>
         <button
           onClick={this.props.onReset}
           className='btn btn-dark btn-space'>
-            Reset
+          Reset
         </button>
       </React.Fragment>
     )
