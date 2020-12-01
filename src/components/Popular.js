@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
+import Loading from './Loading';
 import { GoMarkGithub, GoStar, GoGitBranch, GoIssueOpened } from 'react-icons/go';
 import { fetchPopularRepos } from '../utils/api';
 
@@ -130,7 +131,7 @@ export default class Popular extends React.Component {
                     selected = {selectedLanguage}
                     onUpdateLanguage = {this.updateLanguage}
                 />
-                {this.isLoading() && <p>Loading...</p>}
+                {this.isLoading() && <Loading text='Fetching Repos' />}
                 {error && <p className = 'center-text error'>{error}</p> }
                 {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]}/>}
             </React.Fragment>
