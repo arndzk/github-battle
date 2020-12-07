@@ -3,26 +3,33 @@ import PropTypes from 'prop-types';
 import { GoOrganization } from 'react-icons/go';
 import { GiBoxingGlove, GiLaurelsTrophy, GiCancel } from 'react-icons/gi';
 import Results from './Results';
+import { ThemeConsumer } from '../contexts/theme';
 
-function Instructions () {
+function Instructions() {
     return (
-        <div className = 'instructions-container'>
-            <h1 className = 'center-text header-lg'>Instructions</h1>
-            <ol className = 'container-sm grid center-text battle-instructions'>
-                <li>
-                    <h3 className = 'header-sm'>Enter two Github users...</h3>
-                    <GoOrganization className = 'bg-light' color = '#cfcfc4' size = {140} />
-                </li>
-                <li>
-                    <h3 className = 'header-sm'>... have them battle it out...</h3>
-                    <GiBoxingGlove className = 'bg-light' color = '#ff6961' size = {140} />
-                </li>
-                <li>
-                    <h3 className = 'header-sm'>... and see who wins!</h3>
-                    <GiLaurelsTrophy className = 'bg-light' color = '#ffb347' size = {140} />
-                </li>
-            </ol>
-        </div>
+        <ThemeConsumer>
+            {({ theme }) => (
+                <div className='instructions-container'>
+                    <h1 className='center-text header-lg'>
+                        Instructions
+            </h1>
+                    <ol className='container-sm grid center-text battle-instructions'>
+                        <li>
+                            <h3 className='header-sm'>Enter two Github users...</h3>
+                            <GoOrganization className={`bg-${theme}`} color='#cfcfc4' size={140} />
+                        </li>
+                        <li>
+                            <h3 className='header-sm'>... have them battle it out...</h3>
+                            <GiBoxingGlove className={`bg-${theme}`} color='#ff6961' size={140} />
+                        </li>
+                        <li>
+                            <h3 className='header-sm'>... and see who wins!</h3>
+                            <GiLaurelsTrophy className={`bg-${theme}`} color='#ffb347' size={140} />
+                        </li>
+                    </ol>
+                </div>
+            )}
+        </ThemeConsumer>
     )
 }
 
@@ -51,29 +58,33 @@ class PlayerInput extends React.Component {
 
     render() {
         return (
-            <form className = 'column player' onSubmit = {this.handleSubmit}>
-                <label htmlFor = 'username' className = 'player-label'>
-                    {this.props.label}
-                </label>
-                <div className = 'row player-inputs'>
-                    <input
-                        type = 'text'
-                        id = 'username'
-                        className = 'input-light'
-                        placeholder = 'Github Username'
-                        autoComplete = 'off'
-                        value = {this.state.username}
-                        onChange = {this.handleChange}
-                    />
-                    <button
-                        className = 'btn btn-dark'
-                        type = 'submit'
-                        disabled = {!this.state.username}
-                    >
-                        Submit
-                    </button>
-                </div>
-            </form>
+            <ThemeConsumer>
+                {({ theme }) => (
+                    <form className='column player' onSubmit={this.handleSubmit}>
+                        <label htmlFor='username' className='player-label'>
+                            {this.props.label}
+                        </label>
+                        <div className='row player-inputs'>
+                            <input
+                                type='text'
+                                id='username'
+                                className={`input-${theme}`}
+                                placeholder='Github Username'
+                                autoComplete='off'
+                                value={this.state.username}
+                                onChange={this.handleChange}
+                            />
+                            <button
+                                className={`btn ${theme === 'dark' ? 'btn-light' : 'btn-dark'}`}
+                                type='submit'
+                                disabled={!this.state.username}
+                            >
+                                Submit
+                        </button>
+                        </div>
+                    </form>
+                )}
+            </ThemeConsumer>
         );
     }
 }
@@ -83,28 +94,32 @@ PlayerInput.propTypes = {
     label: PropTypes.string.isRequired
 }
 
-function PlayerPreview ({ username, onReset, label }) {
+function PlayerPreview({ username, onReset, label }) {
     return (
-        <div className = 'column player'>
-            <h3 className = 'player-label'>{label}</h3>
-            <div className = 'row bg-ligh'>
-                <div className = 'player-info'>
-                    <img 
-                        className = 'avatar-sm'
-                        src = {`https://github.com/${username}.png?size=200`}
-                        alt = {`Avatar for ${username}`}
-                    />
-                    <a 
-                        href = {`https://github.com/${username}`}
-                        className = 'link'>
+        <ThemeConsumer>
+            {({ theme }) => (
+                <div className='column player'>
+                <h3 className='player-label'>{label}</h3>
+                <div className={`row bg-${theme}`}>
+                    <div className='player-info'>
+                        <img
+                            className='avatar-sm'
+                            src={`https://github.com/${username}.png?size=200`}
+                            alt={`Avatar for ${username}`}
+                        />
+                        <a
+                            href={`https://github.com/${username}`}
+                            className='link'>
                             {username}
-                    </a>
+                        </a>
+                    </div>
+                    <button className='btn-clear flex-center' onClick={onReset}>
+                        <GiCancel color='#ff6961' size={22} />
+                    </button>
                 </div>
-                <button className = 'btn-clear flex-center' onClick = {onReset}>
-                    <GiCancel color = '#ff6961' size = {22}/>
-                </button>
             </div>
-        </div>
+            )}
+        </ThemeConsumer>
     )
 }
 
@@ -145,10 +160,10 @@ export default class Battle extends React.Component {
 
         if (battle === true) {
             return (
-                <Results 
-                    playerOne = {playerOne} 
-                    playerTwo = {playerTwo}
-                    onReset = {() => this.setState({
+                <Results
+                    playerOne={playerOne}
+                    playerTwo={playerTwo}
+                    onReset={() => this.setState({
                         playerOne: null,
                         playerTwo: null,
                         battle: false
@@ -161,38 +176,38 @@ export default class Battle extends React.Component {
             <React.Fragment>
                 <Instructions />
 
-                <div className = 'players-container'>
-                    <h1 className = 'center-text header-lg'>
+                <div className='players-container'>
+                    <h1 className='center-text header-lg'>
                         Players
                     </h1>
-                    <div className = "row space-around">
-                        {playerOne === null 
+                    <div className="row space-around">
+                        {playerOne === null
                             ? <PlayerInput
-                                label = 'Player One'
-                                onSubmit = {(player) => this.handleSubmit('playerOne', player)}
+                                label='Player One'
+                                onSubmit={(player) => this.handleSubmit('playerOne', player)}
                             />
-                            : <PlayerPreview 
-                                username = {playerOne} 
-                                label = 'Player One' 
-                                onReset = {() => this.handleReset('playerOne')} 
+                            : <PlayerPreview
+                                username={playerOne}
+                                label='Player One'
+                                onReset={() => this.handleReset('playerOne')}
                             />
                         }
-                        {playerTwo === null 
+                        {playerTwo === null
                             ? <PlayerInput
-                                label = 'Player Two'
-                                onSubmit = {(player) => this.handleSubmit('playerTwo', player)}
+                                label='Player Two'
+                                onSubmit={(player) => this.handleSubmit('playerTwo', player)}
                             />
-                            : <PlayerPreview 
-                                username = {playerTwo} 
-                                label = 'Player Two' 
-                                onReset = {() => this.handleReset('playerTwo')} 
+                            : <PlayerPreview
+                                username={playerTwo}
+                                label='Player Two'
+                                onReset={() => this.handleReset('playerTwo')}
                             />
                         }
                     </div>
                     {playerOne && playerTwo && (
                         <button
-                            className = 'btn btn-dark btn-space'
-                            onClick = {() => this.setState({battle: true})}
+                            className='btn btn-dark btn-space'
+                            onClick={() => this.setState({ battle: true })}
                         >
                             Battle
                         </button>
