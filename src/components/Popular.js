@@ -7,7 +7,7 @@ import { GoMarkGithub, GoStar, GoGitBranch, GoIssueOpened } from 'react-icons/go
 import { fetchPopularRepos } from '../utils/api';
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
-    const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'Python', 'C#'];
+    const languages = ['All', 'JavaScript', 'HTML', 'CSS', 'Ruby', 'Python'];
     return (
         <ul className='flex-center'>
             {languages.map((language) => (
