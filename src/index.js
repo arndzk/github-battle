@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 import Nav from './components/Nav';
 import Popular from './components/Popular';
@@ -29,9 +29,12 @@ class App extends React.Component {
           <div className={this.state.theme}>
             <div className='container'>
               <Nav />
-              <Route exact path='/' component={Battle} />
-              <Route path='/results' component={Results} />
-              <Route path='/popular' component={Popular} />
+              <Switch>
+                <Route exact path='/' component={Battle} />
+                <Route path='/results' component={Results} />
+                <Route path='/popular' component={Popular} />
+                <Route render={() => <h1>404</h1>}/>
+              </Switch>
             </div>
           </div>
         </ThemeProvider>
