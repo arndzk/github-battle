@@ -5,6 +5,7 @@ import './index.css';
 import Nav from './components/Nav';
 import Popular from './components/Popular';
 import Battle from './components/Battle';
+import Results from './components/Results';
 import { ThemeProvider } from './contexts/theme';
 
 class App extends React.Component {
@@ -12,7 +13,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      theme: 'light',
+      theme: 'dark',
       toggleTheme: () => {
         this.setState(({ theme }) => ({
           theme: theme === 'light' ? 'dark' : 'light'
@@ -29,6 +30,7 @@ class App extends React.Component {
             <div className='container'>
               <Nav />
               <Route exact path='/' component={Battle} />
+              <Route path='/results' component={Results} />
               <Route path='/popular' component={Popular} />
             </div>
           </div>

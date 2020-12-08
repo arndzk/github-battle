@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { GoOrganization } from 'react-icons/go';
 import { GiBoxingGlove, GiLaurelsTrophy, GiCancel } from 'react-icons/gi';
 import Results from './Results';
@@ -135,8 +136,7 @@ export default class Battle extends React.Component {
 
         this.state = {
             playerOne: null,
-            playerTwo: null,
-            battle: false
+            playerTwo: null
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -156,21 +156,7 @@ export default class Battle extends React.Component {
     }
 
     render() {
-        const { playerOne, playerTwo, battle } = this.state;
-
-        if (battle === true) {
-            return (
-                <Results
-                    playerOne={playerOne}
-                    playerTwo={playerTwo}
-                    onReset={() => this.setState({
-                        playerOne: null,
-                        playerTwo: null,
-                        battle: false
-                    })}
-                />
-            )
-        }
+        const { playerOne, playerTwo } = this.state;
 
         return (
             <React.Fragment>
@@ -205,12 +191,15 @@ export default class Battle extends React.Component {
                         }
                     </div>
                     {playerOne && playerTwo && (
-                        <button
+                        <Link
                             className='btn btn-dark btn-space'
-                            onClick={() => this.setState({ battle: true })}
+                            to={{
+                                pathname: '/results',
+                                search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`
+                            }}
                         >
                             Battle
-                        </button>
+                        </Link>
                     )}
                 </div>
             </React.Fragment>
