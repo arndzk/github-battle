@@ -9,16 +9,13 @@ import Results from './components/Results';
 import { ThemeProvider } from './contexts/theme';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      theme: 'dark',
-      toggleTheme: () => {
-        this.setState(({ theme }) => ({
-          theme: theme === 'light' ? 'dark' : 'light'
-        }))
-      }
+  state = {
+    theme: 'dark',
+    toggleTheme: () => {
+      this.setState(({ theme }) => ({
+        theme: theme === 'light' ? 'dark' : 'light'
+      }))
     }
   }
 
@@ -33,7 +30,7 @@ class App extends React.Component {
                 <Route exact path='/' component={Battle} />
                 <Route path='/results' component={Results} />
                 <Route path='/popular' component={Popular} />
-                <Route render={() => <h1>404</h1>}/>
+                <Route render={() => <h1>404</h1>} />
               </Switch>
             </div>
           </div>
